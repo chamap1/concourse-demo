@@ -2,7 +2,7 @@ resources:
 - name: asm-core
   type: git
   source:
-    uri: https://github.com/dell-asm/asm-core.git
+    uri: https://github.com/chamap1/asm-core.git
     branch: master
     username: chamap1
     password: Chandu!99!
