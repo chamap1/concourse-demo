@@ -30,4 +30,4 @@ jobs:
         args:
         - -exc
         - |
-          gradlew
+          ./gradlew
