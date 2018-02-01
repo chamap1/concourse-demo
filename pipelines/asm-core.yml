@@ -1,0 +1,33 @@
+resources:
+- name: asm-core
+  type: git
+  source:
+    uri: https://github.com/dell-asm/asm-core.git
+    branch: concourse
+    username: chamap1
+    password: Chandu!99!
+
+jobs:
+- name: package
+  public: true
+  plan:
+  - get: asm-core
+    trigger: true
+  - task: compile
+    privileged: true
+    config:
+      platform: linux
+      image_resource:
+        type: docker-image
+        source: {repository: gradle}
+
+      inputs:
+      - name: asm-core
+
+      run:
+        path: bash
+        dir: asm-core/
+        args:
+        - -exc
+        - |
+          gradlew
