@@ -23,11 +23,14 @@ jobs:
 
       inputs:
       - name: asm-core
-
+        path: /home/gradle/asm-core
+ 
       run:
+        user: root
         path: bash
-        dir: asm-core/
+        dir: /home/gradle/asm-core/
         args:
         - -exc
         - |
-          ./gradlew
+          echo "STARTING asm-core BUILD ...................... "          
+          ./gradlew --stacktrace
