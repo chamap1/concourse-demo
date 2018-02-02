@@ -1,3 +1,10 @@
+resource_types:
+- name: artifactory_type
+  type: docker-image
+  source:
+    repository: nkcraddock/concourse-artifactory-resource
+    tag: latest
+ 
 resources:
 - name: asm-core
   type: git
@@ -6,7 +13,15 @@ resources:
     branch: master
     username: chamap1
     password: Chandu!99!
-
+- name: asmui_artifactory_repo
+  type: artifactory_type
+  source:
+    url: http://artifactory.mpe.lab.vce.com:8080/artifactory
+    path: concourse-demo/asmui
+    regexp: (.*).war
+    user: admin
+    password: Vcem0123
+ 
 jobs:
 - name: package
   public: true
@@ -20,17 +35,24 @@ jobs:
       image_resource:
         type: docker-image
         source: {repository: gradle}
-
+ 
       inputs:
       - name: asm-core
-        path: /home/gradle/asm-core
  
+      outputs:
+      - name: artifacts
       run:
         user: root
         path: bash
-        dir: /home/gradle/asm-core/
+        dir: /asm-core
         args:
         - -exc
         - |
           echo "STARTING asm-core BUILD ...................... "          
-          ./gradlew --stacktrace
+          ./gradlew -x test --info
+          find / -type d -name "artifacts"
+          cp `find . -name "*.war"` ../artifacts
+          echo "################################## FINISHED asm-core BUILD ...................... "
+  - put: asmui_artifactory_repo
+    params:
+        file: ./artifacts/asmui.war
