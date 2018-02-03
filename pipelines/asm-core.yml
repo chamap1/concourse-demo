@@ -1,5 +1,5 @@
 resource_types:
-- name: artifactory_type
+- name: artifactory
   type: docker-image
   source:
     repository: nkcraddock/concourse-artifactory-resource
@@ -13,8 +13,9 @@ resources:
     branch: master
     username: chamap1
     password: Chandu!99!
+    
 - name: asmui_artifactory_repo
-  type: artifactory_type
+  type: artifactory
   source:
     url: http://artifactory.mpe.lab.vce.com:8080/artifactory
     path: concourse-demo/asmui
@@ -26,8 +27,10 @@ jobs:
 - name: package
   public: true
   plan:
+  
   - get: asm-core
     trigger: true
+  
   - task: compile
     privileged: true
     config:
@@ -41,6 +44,7 @@ jobs:
  
       outputs:
       - name: artifacts
+      
       run:
         user: root
         path: bash
@@ -53,6 +57,7 @@ jobs:
           find / -type d -name "artifacts"
           cp `find . -name "*.war"` ../artifacts
           echo "################################## FINISHED asm-core BUILD ...................... "
+  
   - put: asmui_artifactory_repo
     params:
         file: ./artifacts/asmui.war
