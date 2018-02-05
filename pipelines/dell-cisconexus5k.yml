@@ -1,1 +1,39 @@
-
+resources:
+- name: dell-cisconexus5k
+  type: git
+  source:
+    uri: https://github.com/chamap1/dell-cisconexus5k.git
+    branch: master
+    username: chamap1
+    password: Chandu!99!
+ 
+jobs:
+- name: build
+  public: true
+  plan:
+  
+  - get: dell-cisconexus5k
+    trigger: true
+  
+  - task: unit tests
+    privileged: true
+    config:
+      platform: linux
+      image_resource:
+        type: docker-image
+        source: {repository: circleci/ruby, tag: 2.2}
+ 
+      inputs:
+      - name: dell-cisconexus5k
+      
+      run:
+        path: bash
+        dir: /dell-cisconexus5k
+        args:
+        - -exc
+        - |
+          echo "STARTING dell-cisconexus5k BUILD ...................... "          
+          gem install bundler
+          bundle install
+          bundle exec rake
+          echo "################################## FINISHED dell-cisconexus5k BUILD ...................... "
