@@ -21,7 +21,7 @@ jobs:
       platform: linux
       image_resource:
         type: docker-image
-        source: {repository: circleci/ruby, tag: 2.2}
+        source: {repository: bitnami/ruby, tag: 2.1-master}
  
       inputs:
       - name: dell-cisconexus5k
