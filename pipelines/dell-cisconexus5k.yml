@@ -27,6 +27,7 @@ jobs:
       - name: dell-cisconexus5k
       
       run:
+        user: root
         path: bash
         dir: /dell-cisconexus5k
         args:
