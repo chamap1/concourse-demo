@@ -1,0 +1,38 @@
+resource_types:
+- name: bosh-deployment
+  type: docker-image
+  source:
+    repository: cloudfoundry/bosh-deployment-resource
+ 
+resources:
+- name: sample-bosh-release
+  type: git
+  source:
+    uri: https://github.com/chamap1/learn-bosh-release.git
+    branch: master
+    username: chamap1
+    password: Chandu!99!
+    
+- name: staging
+  type: bosh-deployment
+  source:
+    deployment: demo-deploy
+    target: https://bosh.example.com:25555
+    client: admin
+    client_secret: admin
+    ca_cert: "-----BEGIN CERTIFICATE-----\n-----END CERTIFICATE-----"
+ 
+jobs:
+- name: deploy
+  public: true
+  plan:
+  
+  - get: sample-bosh-release
+    trigger: true
+ 
+      inputs:
+      - name: sample-bosh-release
+  
+- put: staging
+  params:
+    manifest: sample-bosh-release/manifest.yml
