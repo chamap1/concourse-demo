@@ -29,10 +29,7 @@ jobs:
   
   - get: sample-bosh-release
     trigger: true
- 
-      inputs:
-      - name: sample-bosh-release
   
-- put: staging
-  params:
-    manifest: sample-bosh-release/manifest.yml
+  - put: staging
+    params:
+      manifest: sample-bosh-release/manifest.yml
