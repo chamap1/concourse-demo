@@ -17,9 +17,9 @@ resources:
   type: bosh-deployment
   source:
     deployment: demo-deploy
-    target: 10.239.134.81
+    target: https://10.239.99.209:25555
     client: admin
-    client_secret: 38d5gy6eyycy71px3gb5
+    client_secret: 5lchbr2s0ww5by28lijv
     ca_cert: "-----BEGIN CERTIFICATE-----MIIDEzCCAfugAwIBAgIQHEQ8jd7XUtJjQ+tpoeH/ZzANBgkqhkiG9w0BAQsFADAzMQwwCgYDVQQGEwNVU0ExFjAUBgNVBAoTDUNsb3VkIEZvdW5kcnkxCzAJBgNVBAMTAmNhMB4XDTE4MDIwNDA5MTc1NVoXDTE5MDIwNDA5MTc1NVowMzEMMAoGA1UEBhMDVVNBMRYwFAYDVQQKEw1DbG91ZCBGb3VuZHJ5MQswCQYDVQQDEwJjYTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALvPKbK91h3BxlWY5A1yJR4KmQj/ewFA03x9AeLSmuVQRE6vkOfvS3XB/uarvEJvdNSmtV28+PawlVaNaEw/6Oa86kXLU/1FKsyCoack76GYu0fRBwekGmYzOE1BSaH0gNeA+3Ur3bXjv5VW4n7pe8Kc/FQ6jcEpgXPA0Ueo396oSqmVPHK2VrIGokNwNQDpCZtNE2nQRwKE8+54NkD9fLFc+/IYoyGJCzOzBqnfKKcEID7172OBVjzrH3xsuGj9lJiucgTed20MTRSG0Emiy5q6Z8UDmYy7bf4rGY2I9vLr/CzLoRkkK4ZuNxsUCyYcM9GEUza/JCBoLR68hgkfBXECAwEAAaMjMCEwDgYDVR0PAQH/BAQDAgEGMA8GA1UdEwEB/wQFMAMBAf8wDQYJKoZIhvcNAQELBQADggEBAKkOjjB41Z7uvQeysu9oeS6lgMR57cVm3wYp55+ltWSmWkSxP7EwCv9O6kOyMLcQz3l67i3cfGOWbwCPobObFjQ47UHCm3TL8XDUl3JG6FYk0qfh/Xg2vOk6w4UzqmbwYqjmqo862djX5TFxKtsukiAo9dwZYjZbsVxYpnm1sveU5s3I/KGkrfKpwz+H4u/jrsJXARD5TVjtFmBqLnHKd+/kYN+RDXQvRU2wmERTB7/jqYzJZjMGPyNxeXbX3bn3D/uOO+uiJZ++k3RKdWatW3Ls4O3iuGDsjlS4WnDOAcSLyCqrEE0DOJRo59AtD3xrp+IE2w1bfDNtDYBzLNfQLCk=-----END CERTIFICATE-----"
  
 jobs: 
@@ -30,6 +30,21 @@ jobs:
   - get: sample-bosh-release
     trigger: true
   
-  - put: staging
-    params:
-      manifest: sample-bosh-release/manifest.yml
+  - task: deploy
+    privileged: true
+    config:
+      platform: linux
+      image_resource:
+        type: docker-image
+        source: {repository: maven}
+
+      inputs:
+      - name: sample-bosh-release
+
+      run:
+        path: bash
+        dir: sample-bosh-release/
+        args:
+        - -exc
+        - |
+          echo hi
