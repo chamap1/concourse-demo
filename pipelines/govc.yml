@@ -28,8 +28,7 @@ jobs:
   public: true
   plan:
   
-  - get: asm-core
-    trigger: true
+
 
   - get: vro-ova
     trigger: true
