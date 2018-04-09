@@ -17,7 +17,7 @@ resources:
 - name: vro-ova
   type: artifactory
   source:
-    url: http://artifactory.mpe.lab.vce.com:8080/artifactory
+    url: http://artifactory.mpe.lab.vce.com:8081/artifactory
     path: "/concourse-demo/vro"
     regexp: "(.*).war"
     user: admin
