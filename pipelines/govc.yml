@@ -18,8 +18,8 @@ resources:
   type: artifactory
   source:
     url: http://artifactory.mpe.lab.vce.com:8080/artifactory
-    path: concourse-demo/vro
-    regexp: (.*).ova
+    path: "concourse-demo/vro"
+    regexp: "(.*).ova"
     user: admin
     password: Vcem0123
  
