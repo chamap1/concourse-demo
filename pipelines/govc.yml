@@ -1,0 +1,64 @@
+resource_types:
+- name: artifactory
+  type: docker-image
+  source:
+    repository: nkcraddock/concourse-artifactory-resource
+    tag: latest
+ 
+resources:
+- name: asm-core
+  type: git
+  source:
+    uri: https://github.com/chamap1/asm-core.git
+    branch: master
+    username: chamap1
+    password: Chandu!99!
+    
+- name: vro-ova
+  type: artifactory
+  source:
+    url: http://artifactory.mpe.lab.vce.com:8080/artifactory
+    path: concourse-demo
+    regexp: VMware-vRO-Appliance-7.3.0.21553-5521409_OVF10.ova
+    user: admin
+    password: Vcem0123
+ 
+jobs:
+- name: deploy
+  public: true
+  plan:
+  
+  - get: asm-core
+    trigger: true
+  
+  - get: vro-ova
+    trigger: true
+  
+  - task: deploy
+    privileged: true
+    config:
+      platform: linux
+      image_resource:
+        type: docker-image
+        source: {repository: paasmule/govc}
+ 
+      inputs:
+      - name: asm-core
+      - name: vro-ova
+      
+      run:
+        user: root
+        path: bash
+        dir: /vro-ova
+        args:
+        - -exc
+        - |
+          echo "STARTING deploy ...................... "          
+          export GOVC_INSECURE=1
+          export GOVC_URL=dvc01.lab.vce.com
+          export GOVC_USERNAME=lab\\chamap1
+          export GOVC_PASSWORD=Chandu@91
+          export GOVC_DATASTORE=VNX5400-SW-Build-01
+          export GOVC_NETWORK="SW_Build_198"
+          export GOVC_RESOURCE_POOL='/Infrastructure/host/SW-BUILD-TEST/Resources'
+          echo "################################## FINISHED deploy ...................... "
