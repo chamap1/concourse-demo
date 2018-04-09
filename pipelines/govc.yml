@@ -19,7 +19,7 @@ resources:
   source:
     url: http://artifactory.mpe.lab.vce.com:8080/artifactory
     path: "/concourse-demo/vro"
-    regexp: "(.*).war"
+    regexp: "(.*).ova"
     user: admin
     password: Vcem0123
  
@@ -33,7 +33,6 @@ jobs:
   
   - get: vro-ova
     trigger: true
-    params: { explode: true }
   
   - task: deploy
     privileged: true
@@ -63,3 +62,8 @@ jobs:
           export GOVC_NETWORK="SW_Build_198"
           export GOVC_RESOURCE_POOL='/Infrastructure/host/SW-BUILD-TEST/Resources'
           echo "################################## FINISHED deploy ...................... "
+          touch sample.ova
+          
+  - put: vro-ova
+    params:
+        file: sample.ova
