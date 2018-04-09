@@ -19,7 +19,7 @@ resources:
   source:
     url: http://artifactory.mpe.lab.vce.com:8080/artifactory
     path: concourse-demo
-    regexp: VMware-vRO-Appliance-7.3.0.21553-5521409_OVF10.ova
+    regexp: (.*).ova
     user: admin
     password: Vcem0123
  
