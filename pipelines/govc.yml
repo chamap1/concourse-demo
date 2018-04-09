@@ -31,6 +31,8 @@ jobs:
   - get: asm-core
     trigger: true
 
+  - get: vro-ova
+    trigger: true
   
   - task: deploy
     privileged: true
