@@ -2,7 +2,7 @@ resource_types:
 - name: artifactory
   type: docker-image
   source:
-    repository: pivotalservices/artifactory-resource
+    repository: nkcraddock/concourse-artifactory-resource
     tag: latest
  
 resources:
@@ -17,7 +17,7 @@ resources:
 - name: vro-ova
   type: artifactory
   source:
-    url: http://artifactory.mpe.lab.vce.com:8081/artifactory
+    url: http://artifactory.mpe.lab.vce.com:8080/artifactory
     path: "/concourse-demo/vro"
     regexp: "(.*).war"
     user: admin
