@@ -28,10 +28,9 @@ jobs:
   public: true
   plan:
   
-
-
-  - get: vro-ova
+  - get: asm-core
     trigger: true
+
   
   - task: deploy
     privileged: true
