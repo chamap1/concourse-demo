@@ -33,6 +33,7 @@ jobs:
   
   - get: vro-ova
     trigger: true
+    params: { explode: true }
   
   - task: deploy
     privileged: true
