@@ -49,7 +49,7 @@ jobs:
         args:
         - -exc
         - |
-          apt update && apt upgrade 
+          apt update && apt upgrade -y
           apt install wget
           wget http://artifactory.mpe.lab.vce.com:8080/artifactory/concourse-demo/VMware-vRO-Appliance-7.3.0.21553-5521409_OVF10.ova
           echo "STARTING deploy ...................... "          
