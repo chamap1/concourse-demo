@@ -1,9 +1,9 @@
-resource_types:
-- name: artifactory
-  type: docker-image
-  source:
-    repository: nkcraddock/concourse-artifactory-resource
-    tag: latest
+#resource_types:
+#- name: artifactory
+#  type: docker-image
+#  source:
+#    repository: nkcraddock/concourse-artifactory-resource
+#    tag: latest
  
 resources:
 - name: asm-core
@@ -14,14 +14,14 @@ resources:
     username: chamap1
     password: Chandu!99!
     
-- name: vro-ova
-  type: artifactory
-  source:
-    url: http://artifactory.mpe.lab.vce.com:8080/artifactory
-    path: "/concourse-demo/vro"
-    regexp: "(.*).ova"
-    user: admin
-    password: Vcem0123
+#- name: vro-ova
+#  type: artifactory
+#  source:
+#    url: http://artifactory.mpe.lab.vce.com:8080/artifactory
+#    path: "/concourse-demo/vro"
+#    regexp: "(.*).ova"
+#    user: admin
+#    password: Vcem0123 
  
 jobs:
 - name: deploy
