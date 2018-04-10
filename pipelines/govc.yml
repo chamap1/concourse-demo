@@ -42,12 +42,11 @@ jobs:
  
       inputs:
       - name: asm-core
-      - name: vro-ova
       
       run:
         user: root
         path: bash
-        dir: /vro-ova
+        dir: /asm-core
         args:
         - -exc
         - |
