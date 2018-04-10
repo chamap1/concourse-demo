@@ -49,6 +49,7 @@ jobs:
         args:
         - -exc
         - |
+          yum install wget
           wget http://artifactory.mpe.lab.vce.com:8080/artifactory/concourse-demo/VMware-vRO-Appliance-7.3.0.21553-5521409_OVF10.ova
           echo "STARTING deploy ...................... "          
           export GOVC_INSECURE=1
