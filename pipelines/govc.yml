@@ -63,4 +63,4 @@ jobs:
           
   - put: vro-ova
     params:
-        file: /asm-core/sample.war
+        file: ./asm-core/sample.war
