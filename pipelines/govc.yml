@@ -62,6 +62,7 @@ jobs:
           export GOVC_NETWORK="SW_Build_198"
           export GOVC_RESOURCE_POOL='/Infrastructure/host/SW-BUILD-TEST/Resources'
           govc about
+          govc import.ova -options=vra-ova.json VMware-vRO-Appliance-7.3.0.21553-5521409_OVF10.ova
           echo "################################## FINISHED deploy ...................... "
           
       
