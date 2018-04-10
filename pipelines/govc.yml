@@ -41,7 +41,6 @@ jobs:
  
       inputs:
       - name: asm-core
-      - name: vro-ova
       
       run:
         user: root
