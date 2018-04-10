@@ -31,6 +31,7 @@ jobs:
   - get: asm-core
     trigger: true
 
+  - get: vro-ova
   
   - task: deploy
     privileged: true
@@ -42,6 +43,7 @@ jobs:
  
       inputs:
       - name: asm-core
+      - name: vro-ova
       
       run:
         user: root
@@ -59,8 +61,5 @@ jobs:
           export GOVC_NETWORK="SW_Build_198"
           export GOVC_RESOURCE_POOL='/Infrastructure/host/SW-BUILD-TEST/Resources'
           echo "################################## FINISHED deploy ...................... "
-          touch sample.war
           
-  - put: vro-ova
-    params:
-        file: ./asm-core/sample.war
+      
