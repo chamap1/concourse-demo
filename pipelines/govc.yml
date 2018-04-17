@@ -28,7 +28,7 @@ jobs:
   public: true
   plan:
   
-  - get: asm-core
+  - get: vro-ova
     trigger: true
   
   - task: deploy
@@ -40,12 +40,12 @@ jobs:
         source: {repository: paasmule/govc}
  
       inputs:
-      - name: asm-core
+      - name: vro-ova
       
       run:
         user: root
         path: bash
-        dir: /asm-core
+        dir: /vro-ova
         args:
         - -exc
         - |
