@@ -6,7 +6,7 @@
 #    tag: latest
  
 resources:
-- name: asm-core
+- name: vro-ova
   type: git
   source:
     uri: https://github.com/chamap1/asm-core.git
@@ -24,7 +24,7 @@ resources:
 #    password: Vcem0123 
  
 jobs:
-- name: deploy
+- name: govc-deploy
   public: true
   plan:
   
